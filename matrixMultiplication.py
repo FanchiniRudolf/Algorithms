@@ -8,11 +8,14 @@ def openArchive(nombre):
 
     matriz =[]
     for x in renglones:
-        temp = []
-        temp = x.split(",")
-        for i in range(len(temp)):
-            temp[i]= int(temp[i])
-        matriz.append(temp)
+        if(x==""):
+            renglones.remove(x)
+        else:
+            temp = []
+            temp = x.split(",")
+            for i in range(len(temp)):
+                temp[i]= int(temp[i])
+            matriz.append(temp)
 
 
     archivo1.close()

@@ -31,5 +31,25 @@ def openArchive(nombre):
     archivo.close()
     return matriz
 
+def fuerzaBruta(matrizA, matrizB):
+    matrizC=[]
+    dimension = len(matrizA[0])
 
-print(openArchive("01. Matrix_A_16_2_4.txt"))
+    for renglones in range(dimension):
+        temp=[]
+        for i in range(dimension):
+            celda=0
+            for j in range(dimension):
+                celda += matrizA[i][j]*matrizB[j][i]
+            temp.append(celda)
+        matrizC.append(temp)
+
+    return matrizC
+
+matrizA = openArchive("3x3A.txt")
+matrizB = openArchive("3x3B.txt")
+print(fuerzaBruta(matrizA, matrizB))
+
+
+
+

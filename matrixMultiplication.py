@@ -1,22 +1,33 @@
-
+#regresa matriz con matrices por renglones
 def openArchive(nombre):
-    archivo1 = open(nombre, "r",)
+    #abrir archivo
+    archivo = open(nombre, "r",)
 
-    legend = archivo1.read()
+    #leer el contenido del archivo
+    legend = archivo.read()
 
+    #separar renglones
     renglones = legend.split("\n")
 
+
     matriz =[]
+
+    #hacer los renglones arrays de int
     for x in renglones:
-        temp = []
-        temp = x.split(",")
-        for i in range(len(temp)):
-            temp[i]= int(temp[i])
-        matriz.append(temp)
+        #checar que no este vacio
+        if(x==""):
+            renglones.remove(x)
+        else:
+            #separar valores y hacerlos int
+            temp = []
+            temp = x.split(",")
+            for i in range(len(temp)):
+                temp[i]= int(temp[i])
+            #agregarlos a la matriz
+            matriz.append(temp)
 
 
-    archivo1.close()
-
+    archivo.close()
     return matriz
 
 

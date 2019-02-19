@@ -12,49 +12,6 @@ def openArchive(nombre):
 
 
     matriz =[]
-<<<<<<< HEAD
-
-    #hacer los renglones arrays de int
-    for x in renglones:
-        #checar que no este vacio
-        if(x==""):
-            renglones.remove(x)
-        else:
-            #separar valores y hacerlos int
-            temp = []
-            temp = x.split(",")
-            for i in range(len(temp)):
-                temp[i]= int(temp[i])
-            #agregarlos a la matriz
-            matriz.append(temp)
-
-
-    archivo.close()
-    return matriz
-
-def fuerzaBruta(matrizA, matrizB):
-    matrizC=[]
-    dimension = len(matrizA[0])
-
-    for renglones in range(dimension):
-        temp=[]
-        for i in range(dimension):
-            celda=0
-            for j in range(dimension):
-                celda += matrizA[i][j]*matrizB[j][i]
-            temp.append(celda)
-        matrizC.append(temp)
-
-    return matrizC
-
-matrizA = openArchive("3x3A.txt")
-matrizB = openArchive("3x3B.txt")
-print(fuerzaBruta(matrizA, matrizB))
-
-
-
-
-=======
 
     #hacer los renglones arrays de int
     for x in renglones:
@@ -116,4 +73,4 @@ def fuerzaBruta(matrizA, matrizB):
 matrizA = openArchive("01. Matrix_A_16_2_4.txt")
 matrizB = openArchive("02. Matrix_B_16_2_4.txt")
 print(fuerzaBruta(matrizA, matrizB))
->>>>>>> f157489bf91028d63b5422c72b8e8d3cc46899f5
+

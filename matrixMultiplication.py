@@ -48,7 +48,6 @@ def fuerzaBruta(matrizA, matrizB):
 
     while numerosAgregados < l1:
         calculado = 0;
-
         contadorElementosColumna = 0;
         currentFila = matrizA[indiceFila];
         indiceColumna = auxiliar;
@@ -68,6 +67,10 @@ def fuerzaBruta(matrizA, matrizB):
             currentFilaMC += 1;
 
     return matrizC
+
+
+
+
 
 
 matrizA = openArchive("01. Matrix_A_16_2_4.txt")

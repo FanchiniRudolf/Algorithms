@@ -48,7 +48,6 @@ def fuerzaBruta(matrizA, matrizB):
 
     while numerosAgregados < l1:
         calculado = 0;
-
         contadorElementosColumna = 0;
         currentFila = matrizA[indiceFila];
         indiceColumna = auxiliar;
@@ -70,6 +69,15 @@ def fuerzaBruta(matrizA, matrizB):
     return matrizC
 
 
+<<<<<<< HEAD
+
+
+
+
+matrizA = openArchive("01. Matrix_A_16_2_4.txt")
+matrizB = openArchive("02. Matrix_B_16_2_4.txt")
+print(fuerzaBruta(matrizA, matrizB))
+=======
 def strassen(matrizA, matrizB):
     n = len(matrizA[0])
     matrizC=[]
@@ -148,3 +156,4 @@ matrizA = openArchive("3X3A.txt")
 matrizB = openArchive("3x3B.txt")
 print(strassen(matrizA, matrizB))
 
+>>>>>>> 3f33eb6a8c42d0919c39a030b4f4e3c7cc26ae5b

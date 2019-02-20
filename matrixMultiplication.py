@@ -93,7 +93,27 @@ def strassen(matrizA, matrizB):
 
     if (n==2):
         #hacemos caso base
-        print("hola que hace")
+        A11 = matrizA[0][0]
+        A12 = matrizA[0][1]
+        A21 = matrizA[1][0]
+        A22 = matrizA[1][1]
+
+        B11 = matrizB[0][0]
+        B12 = matrizB[0][1]
+        B21 = matrizB[1][0]
+        B22 = matrizB[1][1]
+
+
+        m1=(A11+A22)*(B11+B22)
+        m2=(A21+A22)*B11
+        m3=A11*(B12-B22)
+        m4=A22*(B21-B11)
+        m5=(A11+A12)*B22
+        m6=(A21-A11)*(B11+B12)
+        m7=(A12-A22)*(B21+B22)
+
+        matrizC=[[m1+m4-m5+m7, m3+m5],[m2+m4, m1+m3-m2+m6]]
+
     else:
         print(matrizB[3][3])
         for i in range(n):
@@ -115,14 +135,16 @@ def strassen(matrizA, matrizB):
                     matrizA22.append(matrizA[i][j])
                     matrizB22.append(matrizB[i][j])
 
-    print(matrizA11)
+
+
+    """print(matrizA11)
     print(matrizA12)
     print(matrizA21)
     print(matrizA22)
     print(matrizB11)
     print(matrizB12)
     print(matrizB21)
-    print(matrizB22)
+    print(matrizB22)"""
 
     return matrizC
 
@@ -131,6 +153,6 @@ def strassen(matrizA, matrizB):
 
 matrizA = openArchive("3X3A.txt")
 matrizB = openArchive("3x3B.txt")
-strassen(matrizA, matrizB)
+print(strassen(matrizA, matrizB))
 
 

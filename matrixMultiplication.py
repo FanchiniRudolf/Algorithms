@@ -70,7 +70,59 @@ def fuerzaBruta(matrizA, matrizB):
     return matrizC
 
 
-matrizA = openArchive("01. Matrix_A_16_2_4.txt")
-matrizB = openArchive("02. Matrix_B_16_2_4.txt")
-print(fuerzaBruta(matrizA, matrizB))
+def strassen(matrizA, matrizB):
+    n = len(matrizA[0])
+    matrizC=[]
+
+    matrizA11 = []
+    matrizA12 = []
+    matrizA21 = []
+    matrizA22 = []
+
+    matrizB11 = []
+    matrizB12 = []
+    matrizB21 = []
+    matrizB22 = []
+
+    if (n==2):
+        #hacemos caso base
+        print("hola que hace")
+    else:
+        print(matrizB[3][3])
+        for i in range(n):
+            for j in range(n):
+                if (i <n/2 and j<n/2 ):
+                    #se van a a11 b11
+                    matrizA11.append(matrizA[i][j])
+                    matrizB11.append(matrizB[i][j])
+                elif (i>=n/2 and j<n/2 ):
+                    #se van a a12 b12
+                    matrizA12.append(matrizA[i][j])
+                    matrizB12.append(matrizB[i][j])
+                elif (i<n/2 and j>=n/2 ):
+                    #se van a a21 b21
+                    matrizA21.append(matrizA[i][j])
+                    matrizB21.append(matrizB[i][j])
+                elif (i>=n/2 and j>=n/2 ):
+                    # se van a a22 b22
+                    matrizA22.append(matrizA[i][j])
+                    matrizB22.append(matrizB[i][j])
+
+    print(matrizA11)
+    print(matrizA12)
+    print(matrizA21)
+    print(matrizA22)
+    print(matrizB11)
+    print(matrizB12)
+    print(matrizB21)
+    print(matrizB22)
+
+    return matrizC
+
+
+#dir1= input("Deme la dirección de la primera matriz")
+
+matrizA = openArchive("3X3A.txt")
+matrizB = openArchive("3x3B.txt")
+strassen(matrizA, matrizB)
 

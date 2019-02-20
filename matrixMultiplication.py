@@ -118,7 +118,6 @@ def strassen(matrizA, matrizB):
         matrizC=[[m1+m4-m5+m7, m3+m5],[m2+m4, m1+m3-m2+m6]]
 
     else:
-        print(matrizB[3][3])
         for i in range(n):
             for j in range(n):
                 if (i <n/2 and j<n/2 ):
@@ -137,6 +136,14 @@ def strassen(matrizA, matrizB):
                     # se van a a22 b22
                     matrizA22.append(matrizA[i][j])
                     matrizB22.append(matrizB[i][j])
+
+        m1 = strassen(sumaMatriz(matrizA11, matrizA22), sumaMatriz(matrizB11, matrizB22))
+        m2 = (matrizA21 + matrizA22) * matrizB11
+        m3 = matrizA11 * (matrizB12 - matrizB22)
+        m4 = matrizA22 * (matrizB21 - matrizB11)
+        m5 = (matrizA11 + matrizA12) * matrizB22
+        m6 = (matrizA21 - matrizA11) * (matrizB11 + matrizB12)
+        m7 = (matrizA12 - matrizA22) * (matrizB21 + matrizB22)
 
 
 

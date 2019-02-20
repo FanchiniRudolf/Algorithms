@@ -136,23 +136,23 @@ def strassen(matrizA, matrizB):
                     matrizB22.append(matrizB[i][j])
 
 
-
-    """print(matrizA11)
-    print(matrizA12)
-    print(matrizA21)
-    print(matrizA22)
-    print(matrizB11)
-    print(matrizB12)
-    print(matrizB21)
-    print(matrizB22)"""
-
     return matrizC
 
 
-#dir1= input("Deme la dirección de la primera matriz")
+def restaMatriz(matrizA, matrizB):
+    matrizC = []
+    for k in range(len(matrizA)):
+        matrizC.append([]);
+    for i in range(len(matrizA)):
+        for j in range(len(matrizA[0])):
+            matrizC[i].append(matrizA[i][j]-matrizB[i][j]) ;
+
+    return matrizC;
+
 
 matrizA = openArchive("3X3A.txt")
 matrizB = openArchive("3x3B.txt")
 print(strassen(matrizA, matrizB))
+print(restaMatriz(matrizA, matrizB));
 
 

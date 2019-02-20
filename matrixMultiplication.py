@@ -33,20 +33,20 @@ def openArchive(nombre):
 
 
 def fuerzaBruta(matrizA, matrizB):
-    l1 = len(matrizA[0])*len(matrizA);
-    l2 = len(matrizA[0]);
+    len1 = len(matrizA[0])*len(matrizA);
+    len2 = len(matrizA[0]);
 
     indiceFila = 0;
   
     numerosAgregados = 0;
     matrizC = [];
 
-    while(len(matrizC)<l2):
+    while(len(matrizC)<len2):
         matrizC.append([]);
     currentFilaMC = 0;
     auxiliar = 0;
 
-    while numerosAgregados < l1:
+    while numerosAgregados < len1:
         calculado = 0;
         contadorElementosColumna = 0;
         currentFila = matrizA[indiceFila];
@@ -70,6 +70,7 @@ def fuerzaBruta(matrizA, matrizB):
 
 
 
+<<<<<<< HEAD
 
 
 
@@ -77,6 +78,8 @@ matrizA = openArchive("01. Matrix_A_16_2_4.txt")
 matrizB = openArchive("02. Matrix_B_16_2_4.txt")
 print(fuerzaBruta(matrizA, matrizB))
 
+=======
+>>>>>>> suma
 def strassen(matrizA, matrizB):
     n = len(matrizA[0])
     matrizC=[]
@@ -148,11 +151,26 @@ def strassen(matrizA, matrizB):
 
     return matrizC
 
+def sumaMatriz(matrizA, matrizB):
+    n = len(matrizA)
+    matrizC = []
+    for i in range(n):
+        fila = []
+        for j in range(n):
+            celda = matrizA[i][j]+ matrizB[i][j]
+            fila.append(celda)
+        matrizC.append(fila)
+    return matrizC
+
+
 
 #dir1= input("Deme la dirección de la primera matriz")
 
 matrizA = openArchive("3X3A.txt")
 matrizB = openArchive("3x3B.txt")
-print(strassen(matrizA, matrizB))
+print(sumaMatriz(matrizA, matrizB))
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> suma

@@ -1,3 +1,4 @@
+import sys
 
 #regresa matriz con matrices por renglones
 def openArchive(nombre):
@@ -70,29 +71,20 @@ def fuerzaBruta(matrizA, matrizB):
 
 
 
-<<<<<<< HEAD
-
-
-
-matrizA = openArchive("01. Matrix_A_16_2_4.txt")
-matrizB = openArchive("02. Matrix_B_16_2_4.txt")
-print(fuerzaBruta(matrizA, matrizB))
-
-=======
->>>>>>> suma
 def strassen(matrizA, matrizB):
-    n = len(matrizA[0])
-    matrizC=[]
+    n = len(matrizA)
+    matrizC= [[0 for i in range(n)]for j in range(n)]
 
-    matrizA11 = []
-    matrizA12 = []
-    matrizA21 = []
-    matrizA22 = []
+    matrizA11 = [[0 for i in range(int(n/2))]for j in range(int(n/2))]
+    matrizA12 = [[0 for i in range(int(n/2))]for j in range(int(n/2))]
+    matrizA21 = [[0 for i in range(int(n/2))]for j in range(int(n/2))]
+    matrizA22 = [[0 for i in range(int(n/2))]for j in range(int(n/2))]
 
-    matrizB11 = []
-    matrizB12 = []
-    matrizB21 = []
-    matrizB22 = []
+    matrizB11 = [[0 for i in range(int(n/2))]for j in range(int(n/2))]
+    matrizB12 = [[0 for i in range(int(n/2))]for j in range(int(n/2))]
+    matrizB21 = [[0 for i in range(int(n/2))]for j in range(int(n/2))]
+    matrizB22 = [[0 for i in range(int(n/2))]for j in range(int(n/2))]
+
 
     if (n==2):
         #hacemos caso base
@@ -118,33 +110,39 @@ def strassen(matrizA, matrizB):
         matrizC=[[m1+m4-m5+m7, m3+m5],[m2+m4, m1+m3-m2+m6]]
 
     else:
-        for i in range(n):
-            for j in range(n):
-                if (i <n/2 and j<n/2 ):
-                    #se van a a11 b11
-                    matrizA11.append(matrizA[i][j])
-                    matrizB11.append(matrizB[i][j])
-                elif (i>=n/2 and j<n/2 ):
-                    #se van a a12 b12
-                    matrizA12.append(matrizA[i][j])
-                    matrizB12.append(matrizB[i][j])
-                elif (i<n/2 and j>=n/2 ):
-                    #se van a a21 b21
-                    matrizA21.append(matrizA[i][j])
-                    matrizB21.append(matrizB[i][j])
-                elif (i>=n/2 and j>=n/2 ):
-                    # se van a a22 b22
-                    matrizA22.append(matrizA[i][j])
-                    matrizB22.append(matrizB[i][j])
+        for i in range(n//2):
+            for j in range(n//2):
+                #asignar valores de la grande a la chica
+                matrizA11[i][j] = matrizA[i][j]
+                matrizA12[i][j] = matrizA[i][j+n//2]
+                matrizA21[i][j] = matrizA[i+n//2][j]
+                matrizA22[i][j] = matrizA[i+n//2][j+n//2]
+
+                matrizB11[i][j] = matrizB[i][j]
+                matrizB12[i][j] = matrizB[i][j + n//2]
+                matrizB21[i][j] = matrizB[i + n//2][j]
+                matrizB22[i][j] = matrizB[i + n//2][j + n//2]
+
 
         m1 = strassen(sumaMatriz(matrizA11, matrizA22), sumaMatriz(matrizB11, matrizB22))
-        m2 = (matrizA21 + matrizA22) * matrizB11
-        m3 = matrizA11 * (matrizB12 - matrizB22)
-        m4 = matrizA22 * (matrizB21 - matrizB11)
-        m5 = (matrizA11 + matrizA12) * matrizB22
-        m6 = (matrizA21 - matrizA11) * (matrizB11 + matrizB12)
-        m7 = (matrizA12 - matrizA22) * (matrizB21 + matrizB22)
+        m2 = strassen(sumaMatriz(matrizA21, matrizA22), matrizB11)
+        m3 = strassen(matrizA11 , restaMatriz(matrizB12 , matrizB22))
+        m4 = strassen(matrizA22 , restaMatriz(matrizB21 , matrizB11))
+        m5 = strassen(sumaMatriz(matrizA11 , matrizA12) , matrizB22)
+        m6 = strassen(restaMatriz(matrizA21 , matrizA11) , sumaMatriz(matrizB11 , matrizB12))
+        m7 = strassen(restaMatriz(matrizA12 , matrizA22) , sumaMatriz(matrizB21 , matrizB22))
 
+        matrizC11 = restaMatriz(sumaMatriz(m1 , m4), sumaMatriz(m5, m7))
+        matrizC12 = sumaMatriz(m3 , m5)
+        matrizC21 = sumaMatriz(m2 , m4)
+        matrizC22 = restaMatriz(sumaMatriz(m1 , m3), sumaMatriz(m2 , m6))
+
+        for i in range(n//2):
+            for j in range(n//2):
+                matrizC[i][j] = matrizC11[i][j]
+                matrizC[i][j+n//2] = matrizC12[i][j]
+                matrizC[i+n//2][j] = matrizC21[i][j]
+                matrizC[i+n//2][j+n//2] = matrizC22[i][j]
 
     return matrizC
 
@@ -152,39 +150,29 @@ def strassen(matrizA, matrizB):
 def restaMatriz(matrizA, matrizB):
     matrizC = []
     for k in range(len(matrizA)):
-        matrizC.append([]);
+        matrizC.append([])
     for i in range(len(matrizA)):
         for j in range(len(matrizA[0])):
-            matrizC[i].append(matrizA[i][j]-matrizB[i][j]) ;
-
-<<<<<<< HEAD
-def sumaMatriz(matrizA, matrizB):
-    n = len(matrizA)
-    matrizC = []
-    for i in range(n):
-        fila = []
-        for j in range(n):
-            celda = matrizA[i][j]+ matrizB[i][j]
-            fila.append(celda)
-        matrizC.append(fila)
+            matrizC[i].append(matrizA[i][j]-matrizB[i][j])
     return matrizC
 
 
-=======
-    return matrizC;
->>>>>>> resta
+def sumaMatriz(matrizA, matrizB):
+    matrizC = []
+    for k in range(len(matrizA)):
+        matrizC.append([])
+    for i in range(len(matrizA)):
+        for j in range(len(matrizA[0])):
+            matrizC[i].append(matrizA[i][j] + matrizB[i][j])
+    return matrizC
 
 
-matrizA = openArchive("3X3A.txt")
-matrizB = openArchive("3x3B.txt")
-<<<<<<< HEAD
-print(sumaMatriz(matrizA, matrizB))
-=======
+
+
+matrizA = openArchive("01. Matrix_A_16_2_4.txt")
+matrizB = openArchive("02. Matrix_B_16_2_4.txt")
+print(fuerzaBruta(matrizA,matrizB))
+print("/n")
 print(strassen(matrizA, matrizB))
-print(restaMatriz(matrizA, matrizB));
->>>>>>> resta
 
-<<<<<<< HEAD
 
-=======
->>>>>>> suma

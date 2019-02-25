@@ -2,10 +2,11 @@ from tkinter import *
 from tkinter import filedialog
 
 
+
 # regresa matriz con matrices por renglones
 def openArchive(nombre):
     # abrir archivo
-    archivo = open(nombre, "r", )
+    archivo = open(nombre, "r")
 
     # leer el contenido del archivo
     legend = archivo.read()
@@ -166,18 +167,6 @@ def strassen(matrizA, matrizB):
     return matrizC;
 
 
-<<<<<<< HEAD
-
-
-
-matrizA = openArchive("01. Matrix_A_16_2_4.txt")
-matrizB = openArchive("02. Matrix_B_16_2_4.txt")
-matrizC = openArchive("matriz3.txt");
-matrizD = openArchive("matriz32.txt");
-print(strassen2(matrizA, matrizB))
-print(strassen2(matrizA, matrizB)==fuerzaBruta(matrizA, matrizB))
-
-=======
 def matrizToSting(matriz):
     final =""
     for row in matriz:
@@ -245,7 +234,7 @@ matrizA = []
 matrizB = []
 
 root = Tk()
-root.title("Multiplicación de Matrices")
+root.title("Multiplicacion de Matrices")
 root.geometry("500x300")
 
 topFrame = Frame(root)
@@ -280,4 +269,4 @@ boton3.pack(side = BOTTOM)
 
 
 root.mainloop()
->>>>>>> 65b9efc99e82c112159d3fa23dc1a8843b71aff1
+

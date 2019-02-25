@@ -244,7 +244,6 @@ matrizA = openArchive("01. Matrix_A_16_2_4.txt")
 matrizB = openArchive("02. Matrix_B_16_2_4.txt")
 matrizC = openArchive("matriz3.txt");
 matrizD = openArchive("matriz32.txt");
-print(fuerzaBruta(matrizA, matrizB))
 print(strassen2(matrizA, matrizB))
 print(strassen2(matrizA, matrizB)==fuerzaBruta(matrizA, matrizB))
 

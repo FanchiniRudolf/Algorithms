@@ -1,4 +1,5 @@
-import sys
+from tkinter import *
+from tkinter import filedialog
 
 
 # regresa matriz con matrices por renglones
@@ -67,79 +68,6 @@ def fuerzaBruta(matrizA, matrizB):
     return matrizC
 
 
-def strassen(matrizA, matrizB):
-    n = len(matrizA)
-    matrizC = [[0 for i in range(n)] for j in range(n)]
-
-    matrizA11 = [[0 for i in range(int(n / 2))] for j in range(int(n / 2))]
-    matrizA12 = [[0 for i in range(int(n / 2))] for j in range(int(n / 2))]
-    matrizA21 = [[0 for i in range(int(n / 2))] for j in range(int(n / 2))]
-    matrizA22 = [[0 for i in range(int(n / 2))] for j in range(int(n / 2))]
-
-    matrizB11 = [[0 for i in range(int(n / 2))] for j in range(int(n / 2))]
-    matrizB12 = [[0 for i in range(int(n / 2))] for j in range(int(n / 2))]
-    matrizB21 = [[0 for i in range(int(n / 2))] for j in range(int(n / 2))]
-    matrizB22 = [[0 for i in range(int(n / 2))] for j in range(int(n / 2))]
-
-    if (n == 2):
-        # hacemos caso base
-        A11 = matrizA[0][0]
-        A12 = matrizA[0][1]
-        A21 = matrizA[1][0]
-        A22 = matrizA[1][1]
-
-        B11 = matrizB[0][0]
-        B12 = matrizB[0][1]
-        B21 = matrizB[1][0]
-        B22 = matrizB[1][1]
-
-        m1 = (A11 + A22) * (B11 + B22)
-        m2 = (A21 + A22) * B11
-        m3 = A11 * (B12 - B22)
-        m4 = A22 * (B21 - B11)
-        m5 = (A11 + A12) * B22
-        m6 = (A21 - A11) * (B11 + B12)
-        m7 = (A12 - A22) * (B21 + B22)
-
-        matrizC = [[m1 + m4 - m5 + m7, m3 + m5], [m2 + m4, m1 + m3 - m2 + m6]]
-
-    else:
-        for i in range(n // 2):
-            for j in range(n // 2):
-                # asignar valores de la grande a la chica
-                matrizA11[i][j] = matrizA[i][j]
-                matrizA12[i][j] = matrizA[i][j + n // 2]
-                matrizA21[i][j] = matrizA[i + n // 2][j]
-                matrizA22[i][j] = matrizA[i + n // 2][j + n // 2]
-
-                matrizB11[i][j] = matrizB[i][j]
-                matrizB12[i][j] = matrizB[i][j + n // 2]
-                matrizB21[i][j] = matrizB[i + n // 2][j]
-                matrizB22[i][j] = matrizB[i + n // 2][j + n // 2]
-
-        m1 = strassen(sumaMatriz(matrizA11, matrizA22), sumaMatriz(matrizB11, matrizB22))
-        m2 = strassen(sumaMatriz(matrizA21, matrizA22), matrizB11)
-        m3 = strassen(matrizA11, restaMatriz(matrizB12, matrizB22))
-        m4 = strassen(matrizA22, restaMatriz(matrizB21, matrizB11))
-        m5 = strassen(sumaMatriz(matrizA11, matrizA12), matrizB22)
-        m6 = strassen(restaMatriz(matrizA21, matrizA11), sumaMatriz(matrizB11, matrizB12))
-        m7 = strassen(restaMatriz(matrizA12, matrizA22), sumaMatriz(matrizB21, matrizB22))
-
-        matrizC11 = restaMatriz(sumaMatriz(m1, m4), sumaMatriz(m5, m7))
-        matrizC12 = sumaMatriz(m3, m5)
-        matrizC21 = sumaMatriz(m2, m4)
-        matrizC22 = restaMatriz(sumaMatriz(m1, m3), sumaMatriz(m2, m6))
-
-        for i in range(n // 2):
-            for j in range(n // 2):
-                matrizC[i][j] = matrizC11[i][j]
-                matrizC[i][j + n // 2] = matrizC12[i][j]
-                matrizC[i + n // 2][j] = matrizC21[i][j]
-                matrizC[i + n // 2][j + n // 2] = matrizC22[i][j]
-
-    return matrizC
-
-
 def restaMatriz(matrizA, matrizB):
     matrizC = []
     for k in range(len(matrizA)):
@@ -159,10 +87,11 @@ def sumaMatriz(matrizA, matrizB):
             matrizC[i].append(matrizA[i][j] + matrizB[i][j])
     return matrizC
 
-def strassen2(matrizA, matrizB):
+
+def strassen(matrizA, matrizB):
     n = len(matrizA[0]);
 
-    if(n<=2):
+    if (n <= 2):
         return fuerzaBruta(matrizA, matrizB);
 
     else:
@@ -176,8 +105,8 @@ def strassen2(matrizA, matrizB):
         B21 = [];
         B22 = [];
 
-    lenABs = n/2;
-    for i in range(lenABs):
+    lenABs = n / 2;
+    for i in range(int(lenABs)):
         A11.append([]);
         A12.append([]);
         A21.append([]);
@@ -191,32 +120,32 @@ def strassen2(matrizA, matrizB):
         currentFilaA = matrizA[i];
         currentFilaB = matrizB[i];
 
-        for j in range (len(currentFilaA)):
+        for j in range(len(currentFilaA)):
             auxiliarI = i;
             lenA = len(matrizA);
             if (i >= lenA / 2):
-                auxiliarI -= (lenA / 2);
+                auxiliarI -= int((lenA / 2));
             elementoA = currentFilaA[j];
-            elementoB =  currentFilaB[j];
-            if(i < lenA/2 and j < len(currentFilaA)/2):
-                A11[auxiliarI].append (elementoA);
+            elementoB = currentFilaB[j];
+            if (i < lenA / 2 and j < len(currentFilaA) / 2):
+                A11[auxiliarI].append(elementoA);
                 B11[auxiliarI].append(elementoB);
-            elif(i < lenA/2 and j >= len(currentFilaA)/2):
+            elif (i < lenA / 2 and j >= len(currentFilaA) / 2):
                 A12[auxiliarI].append(elementoA);
                 B12[auxiliarI].append(elementoB);
-            elif(i >= lenA/2 and j < len(currentFilaA)/2):
+            elif (i >= lenA / 2 and j < len(currentFilaA) / 2):
                 A21[auxiliarI].append(elementoA);
                 B21[auxiliarI].append(elementoB);
             else:
                 A22[auxiliarI].append(elementoA);
                 B22[auxiliarI].append(elementoB);
-    m1 = strassen2(sumaMatriz(A11, A22), sumaMatriz(B11, B22));
-    m2 = strassen2(sumaMatriz(A21, A22), B11);
-    m3 = strassen2(A11, restaMatriz(B12, B22));
-    m4 = strassen2(A22, restaMatriz(B21, B11));
-    m5 = strassen2(sumaMatriz(A11, A12), B22);
-    m6 = strassen2(restaMatriz(A21, A11), sumaMatriz(B11, B12));
-    m7 = strassen2(restaMatriz(A12, A22), sumaMatriz(B21, B22));
+    m1 = strassen(sumaMatriz(A11, A22), sumaMatriz(B11, B22));
+    m2 = strassen(sumaMatriz(A21, A22), B11);
+    m3 = strassen(A11, restaMatriz(B12, B22));
+    m4 = strassen(A22, restaMatriz(B21, B11));
+    m5 = strassen(sumaMatriz(A11, A12), B22);
+    m6 = strassen(restaMatriz(A21, A11), sumaMatriz(B11, B12));
+    m7 = strassen(restaMatriz(A12, A22), sumaMatriz(B21, B22));
 
     C11 = sumaMatriz(m1, m4);
     C11 = restaMatriz(C11, m5);
@@ -237,6 +166,7 @@ def strassen2(matrizA, matrizB):
     return matrizC;
 
 
+<<<<<<< HEAD
 
 
 
@@ -247,3 +177,107 @@ matrizD = openArchive("matriz32.txt");
 print(strassen2(matrizA, matrizB))
 print(strassen2(matrizA, matrizB)==fuerzaBruta(matrizA, matrizB))
 
+=======
+def matrizToSting(matriz):
+    final =""
+    for row in matriz:
+        for cell in row:
+            final += str(cell) +","
+        final+="\n"
+    return final
+
+
+def mfileopen1():
+    file1 = filedialog.askopenfile()
+    global txtdri1, matrizA
+    txtdri1 = str(file1.name)
+    dir1.configure(text=txtdri1)
+    matrizA = openArchive(txtdri1)
+
+
+def mfileopen2():
+    file1 = filedialog.askopenfile()
+    global txtdri2, matrizB
+    txtdri2 = str(file1.name)
+    dir2.configure(text=txtdri2)
+    matrizB = openArchive(txtdri2)
+
+def StrassenBtn():
+    matrizC= strassen(matrizA, matrizB)
+    f = filedialog.asksaveasfile(mode='w', defaultextension=".txt")
+    if f is None:  # asksaveasfile return `None` if dialog closed with "cancel".
+        return
+    txtMatc= matrizToSting(matrizC)
+    f.write(txtMatc)
+    f.close()
+
+def FuerzaBtn():
+    matrizC = fuerzaBruta(matrizA, matrizB)
+    f = filedialog.asksaveasfile(mode='w', defaultextension=".txt")
+    if f is None:  # asksaveasfile return `None` if dialog closed with "cancel".
+        return
+    txtMatc = matrizToSting(matrizC)
+    f.write(txtMatc)
+    f.close()
+
+def AmbasBtn():
+    matrizC = strassen(matrizA, matrizB)
+    f = filedialog.asksaveasfile(mode='w', defaultextension=".txt")
+    if f is None:  # asksaveasfile return `None` if dialog closed with "cancel".
+        return
+    txtMatc = matrizToSting(matrizC)
+    f.write(txtMatc)
+    f.close()
+    matrizC = fuerzaBruta(matrizA, matrizB)
+    f = filedialog.asksaveasfile(mode='w', defaultextension=".txt")
+    if f is None:  # asksaveasfile return `None` if dialog closed with "cancel".
+        return
+    txtMatc = matrizToSting(matrizC)
+    f.write(txtMatc)
+    f.close()
+
+
+
+
+txtdri1 = "No ha escogido ningun archivo"
+txtdri2 = "No ha escogido ningun archivo"
+matrizA = []
+matrizB = []
+
+root = Tk()
+root.title("Multiplicación de Matrices")
+root.geometry("500x300")
+
+topFrame = Frame(root)
+topFrame["pady"] = 10
+topFrame.pack(side = TOP)
+middleFrame = Frame(root)
+middleFrame.pack(side = TOP)
+middleFrame["pady"] = 10
+bottomFrame = Frame(root)
+bottomFrame.pack(side=BOTTOM)
+bottomFrame["pady"] = 10
+
+accion = Label(topFrame, text="Escoja las direcciones")
+accion.pack(side=TOP)
+
+dir1= Label(topFrame, text=txtdri1)
+btdir1 = Button(topFrame, text="Escoga dir 1", command=mfileopen1)
+dir1.pack(side=LEFT)
+btdir1.pack(side=BOTTOM)
+
+dir2= Label(middleFrame, text="No ha escogido ningun archivo")
+btdir2 = Button(middleFrame, text="Escoga dir 2", command=mfileopen2)
+dir2.pack(side=LEFT)
+btdir2.pack(side=BOTTOM)
+
+boton1 = Button(bottomFrame, text="Strassen Method", command= StrassenBtn)
+boton2 = Button(bottomFrame, text="Fuerza Bruta", command = FuerzaBtn)
+boton3 = Button(bottomFrame, text="Ambos metodos", command = AmbasBtn)
+boton1.pack(side =TOP )
+boton2.pack(side = TOP)
+boton3.pack(side = BOTTOM)
+
+
+root.mainloop()
+>>>>>>> 65b9efc99e82c112159d3fa23dc1a8843b71aff1

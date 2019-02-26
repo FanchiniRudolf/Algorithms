@@ -1,7 +1,3 @@
-from tkinter import *
-from tkinter import filedialog
-
-
 
 # regresa matriz con matrices por renglones
 def openArchive(nombre):
@@ -98,8 +94,9 @@ def strassen(matrizA, matrizB):
 
 
     if (n <= 2):
+        multis+=8;
         return fuerzaBruta(matrizA, matrizB);
-        muktis+=8;
+
 
     else:
         matrizC = [[0 for i in range(n)] for j in range(n)];
@@ -173,109 +170,8 @@ def strassen(matrizA, matrizB):
         return matrizC;
 
 multis = 0;
-
-def matrizToSting(matriz):
-    final =""
-    for row in matriz:
-        for cell in row:
-            final += str(cell) +","
-        final+="\n"
-    return final
-
-
-def mfileopen1():
-    file1 = filedialog.askopenfile()
-    global txtdri1, matrizA
-    txtdri1 = str(file1.name)
-    dir1.configure(text=txtdri1)
-    matrizA = openArchive(txtdri1)
-
-
-def mfileopen2():
-    file1 = filedialog.askopenfile()
-    global txtdri2, matrizB
-    txtdri2 = str(file1.name)
-    dir2.configure(text=txtdri2)
-    matrizB = openArchive(txtdri2)
-
-def StrassenBtn():
-    matrizC= strassen(matrizA, matrizB)
-    f = filedialog.asksaveasfile(mode='w', defaultextension=".txt")
-    if f is None:  # asksaveasfile return `None` if dialog closed with "cancel".
-        return
-    txtMatc= matrizToSting(matrizC)
-    f.write(txtMatc)
-    f.close()
-
-def FuerzaBtn():
-    matrizC = fuerzaBruta(matrizA, matrizB)
-    f = filedialog.asksaveasfile(mode='w', defaultextension=".txt")
-    if f is None:  # asksaveasfile return `None` if dialog closed with "cancel".
-        return
-    txtMatc = matrizToSting(matrizC)
-    f.write(txtMatc)
-    f.close()
-
-def AmbasBtn():
-    matrizC = strassen(matrizA, matrizB)
-    f = filedialog.asksaveasfile(mode='w', defaultextension=".txt")
-    if f is None:  # asksaveasfile return `None` if dialog closed with "cancel".
-        return
-    txtMatc = matrizToSting(matrizC)
-    f.write(txtMatc)
-    f.close()
-    matrizC = fuerzaBruta(matrizA, matrizB)
-    f = filedialog.asksaveasfile(mode='w', defaultextension=".txt")
-    if f is None:  # asksaveasfile return `None` if dialog closed with "cancel".
-        return
-    txtMatc = matrizToSting(matrizC)
-    f.write(txtMatc)
-    f.close()
-
-
-
-
-
-print(fuerzaBruta(matrizA, matrizB))
-txtdri1 = "No ha escogido ningun archivo"
-txtdri2 = "No ha escogido ningun archivo"
-matrizA = []
-matrizB = []
-
-root = Tk()
-root.title("Multiplicacion de Matrices")
-root.geometry("500x300")
-
-topFrame = Frame(root)
-topFrame["pady"] = 10
-topFrame.pack(side = TOP)
-middleFrame = Frame(root)
-middleFrame.pack(side = TOP)
-middleFrame["pady"] = 10
-bottomFrame = Frame(root)
-bottomFrame.pack(side=BOTTOM)
-bottomFrame["pady"] = 10
-
-accion = Label(topFrame, text="Escoja las direcciones")
-accion.pack(side=TOP)
-
-dir1= Label(topFrame, text=txtdri1)
-btdir1 = Button(topFrame, text="Escoga dir 1", command=mfileopen1)
-dir1.pack(side=LEFT)
-btdir1.pack(side=BOTTOM)
-
-dir2= Label(middleFrame, text="No ha escogido ningun archivo")
-btdir2 = Button(middleFrame, text="Escoga dir 2", command=mfileopen2)
-dir2.pack(side=LEFT)
-btdir2.pack(side=BOTTOM)
-
-boton1 = Button(bottomFrame, text="Strassen Method", command= StrassenBtn)
-boton2 = Button(bottomFrame, text="Fuerza Bruta", command = FuerzaBtn)
-boton3 = Button(bottomFrame, text="Ambos metodos", command = AmbasBtn)
-boton1.pack(side =TOP )
-boton2.pack(side = TOP)
-boton3.pack(side = BOTTOM)
-
-
-root.mainloop()
-
+matrizA = openArchive("01. Matrix_A_16_2_4.txt")
+matrizB = openArchive("02. Matrix_B_16_2_4.txt")
+print(fuerzaBruta(matrizA, matrizB));
+print(strassen(matrizA, matrizB));
+print(multis);

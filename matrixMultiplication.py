@@ -37,7 +37,7 @@ def openArchive(nombre):
 def fuerzaBruta(matrizA, matrizB):
     len1 = len(matrizA[0]) * len(matrizA);
     len2 = len(matrizA[0]);
-    contadorMultiplicaciones = 0;
+    global multisCount
 
     indiceFila = 0;
 
@@ -57,7 +57,7 @@ def fuerzaBruta(matrizA, matrizB):
         for elemento in currentFila:
             calculado = calculado + (elemento * matrizB[contadorElementosColumna][indiceColumna]);
             contadorElementosColumna += 1;
-            contadorMultiplicaciones +=1;
+            multisCount +=1;
 
         matrizC[currentFilaMC].append(calculado);
         numerosAgregados += 1;
@@ -68,7 +68,6 @@ def fuerzaBruta(matrizA, matrizB):
             indiceFila += 1;
             currentFilaMC += 1;
 
-    print(contadorMultiplicaciones);
     return matrizC
 
 
@@ -94,14 +93,15 @@ def sumaMatriz(matrizA, matrizB):
 
 def strassen(matrizA, matrizB):
     n = len(matrizA[0]);
-    global multis
+    global multisCount
 
 
     if (n <= 2):
         return fuerzaBruta(matrizA, matrizB);
-        muktis+=8;
+        multisCount+=8;
 
     else:
+        multisCount +=1;
         matrizC = [[0 for i in range(n)] for j in range(n)];
         A11 = [];
         A12 = [];
@@ -172,7 +172,6 @@ def strassen(matrizA, matrizB):
 
         return matrizC;
 
-multis = 0;
 
 def matrizToSting(matriz):
     final =""
@@ -199,24 +198,32 @@ def mfileopen2():
     matrizB = openArchive(txtdri2)
 
 def StrassenBtn():
+    global multisCount
+    multisCount = 0
     matrizC= strassen(matrizA, matrizB)
     f = filedialog.asksaveasfile(mode='w', defaultextension=".txt")
     if f is None:  # asksaveasfile return `None` if dialog closed with "cancel".
         return
     txtMatc= matrizToSting(matrizC)
+    strasMult.configure(text="Pasos Elementarios = {0}".format(multisCount))
     f.write(txtMatc)
     f.close()
 
 def FuerzaBtn():
+    global multisCount
+    multisCount = 0
     matrizC = fuerzaBruta(matrizA, matrizB)
     f = filedialog.asksaveasfile(mode='w', defaultextension=".txt")
     if f is None:  # asksaveasfile return `None` if dialog closed with "cancel".
         return
     txtMatc = matrizToSting(matrizC)
+    bruteMult.configure(text = "Pasos Elementarios = {0}".format(multisCount))
     f.write(txtMatc)
     f.close()
 
 def AmbasBtn():
+    global multisCount
+    multisCount = 0
     matrizC = strassen(matrizA, matrizB)
     f = filedialog.asksaveasfile(mode='w', defaultextension=".txt")
     if f is None:  # asksaveasfile return `None` if dialog closed with "cancel".
@@ -236,9 +243,11 @@ def AmbasBtn():
 
 
 
-print(fuerzaBruta(matrizA, matrizB))
+multisCount = 0;
+
 txtdri1 = "No ha escogido ningun archivo"
 txtdri2 = "No ha escogido ningun archivo"
+
 matrizA = []
 matrizB = []
 
@@ -270,10 +279,16 @@ dir2.pack(side=LEFT)
 btdir2.pack(side=BOTTOM)
 
 boton1 = Button(bottomFrame, text="Strassen Method", command= StrassenBtn)
+strasMult= Label(bottomFrame, text ="Pasos Elementarios = 0")
 boton2 = Button(bottomFrame, text="Fuerza Bruta", command = FuerzaBtn)
+bruteMult= Label(bottomFrame, text ="Pasos Elementarios = 0")
 boton3 = Button(bottomFrame, text="Ambos metodos", command = AmbasBtn)
+
+#inicializcion metodos
 boton1.pack(side =TOP )
+strasMult.pack(side = TOP)
 boton2.pack(side = TOP)
+bruteMult.pack(side = TOP)
 boton3.pack(side = BOTTOM)
 
 

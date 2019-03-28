@@ -37,11 +37,14 @@ def openArchive(nombre):
     return graph
 
 def pageRank(graph, rankList):
+    tempList = []
+    for x in rankList:
+        tempList.append(x)
     for node in graph:
         tempRank = 0.0
         for pointingNode in graph:
             if(node in graph[pointingNode]):
-                tempRank += rankList[pointingNode-1]/len(graph[pointingNode])
+                tempRank += tempList[pointingNode-1]/len(graph[pointingNode])
         rankList[node-1] = tempRank
 
     return rankList
@@ -58,7 +61,13 @@ def getFileName():
     rankList = [1 / len(graph) for i in range(len(graph))]
     for i in range(iter):
         rankList = (pageRank(graph, rankList))
-    resultLabel.configure(text=rankList)
+
+    finalval = "["
+    for rank in rankList:
+        finalval += " " + str(round(rank, 4)) + ","
+    finalval = finalval[:-1]
+    finalval += "]"
+    resultLabel.configure(text=finalval)
 
 def setFileName():
     input=vectorEntry.get()
@@ -89,7 +98,13 @@ def setFileName():
     rankList = [1 / len(graph) for i in range(len(graph))]
     for i in range(iter):
         rankList =(pageRank(graph, rankList))
-    resultLabel.configure(text=rankList)
+
+    finalval= "["
+    for rank in rankList:
+        finalval += " " + str(round(rank, 4)) + ","
+    finalval=finalval[:-1]
+    finalval+="]"
+    resultLabel.configure(text=finalval)
 
 
 txtdri1 = "No ha escogido ningun archivo"

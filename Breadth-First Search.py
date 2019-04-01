@@ -12,17 +12,30 @@ def insert (node, node2, graph):
     return graph
 
 def BFS(Q,A,graph):
-    print(Q)
-    iterator = Q.pop()
-    A.append(iterator)
-    print(A)
-    print(Q)
-    print(graph)
+    iterNum=0
+    while(Q):
+
+        print("Iteracion: " + str(iterNum))
+        iterNum+=1
+        print("Fila Q: "+ str(Q))
+
+        iterator = Q.pop()
+        if (iterator not in A):
+            A.append(iterator)
+        print("Ya visitados: " + str(A))
+        tempFile = graph[iterator]
+        for item in tempFile:
+            if (item not in A):
+                Q.insert(0, item)
+                A.append(item)
+    print("Iteracion: " + str(iterNum))
+    print("Fila Q: " + str(Q))
+    print("Ya visitados: " + str(A))
+
 
 
 def startUp(vectores):
     graph = {}
-
     # hacer los renglones arrays de int
     for node in vectores:
         # checar que no este vacio
@@ -39,7 +52,8 @@ def startUp(vectores):
     return graph
 
 
-input="{(1,2) (1,3) (2,3) (3,5) (3,4) (4,2)}"
+input="{(1,2) (1,3) (1,4) (2,3) (2,5) (2,6) (3,7) " \
+      "(3,8) (4,8) (7,9)}"
 nums = (input[1:-1])
 vec = nums.split(" ")
 G = nx.Graph()

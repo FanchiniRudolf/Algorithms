@@ -52,8 +52,7 @@ def startUp(vectores):
     return graph
 
 
-input="{(1,2) (1,3) (1,4) (2,3) (2,5) (2,6) (3,7) " \
-      "(3,8) (4,8) (7,9)}"
+input=input("Ejemplo: {(1,2) (1,3) (1,4) (2,3) (2,5) (2,6) (3,7) (3,8) (4,8) (7,9)} \n Ponga el suyo: ")
 nums = (input[1:-1])
 vec = nums.split(" ")
 G = nx.Graph()

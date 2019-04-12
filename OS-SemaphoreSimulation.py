@@ -7,7 +7,7 @@ class process(object):
        self.name = name
 
    def request(self):
-       print()
+       print("")
 
 class semaphor(object):
     counter = 1

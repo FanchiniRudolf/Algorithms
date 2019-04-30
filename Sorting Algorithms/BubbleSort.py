@@ -19,3 +19,16 @@ Next i
 End While
 End Bubblesort
 """
+
+def bubbleSort(lista):
+    notSorted = True
+
+    while(notSorted):
+        notSorted = False
+        for i in range(1, len(lista)):
+            if(int(lista[i])<int(lista[i-1])):
+                temp = lista[i]
+                lista[i] = lista[i-1]
+                lista[i-1] = temp
+                notSorted = True
+    print(lista)

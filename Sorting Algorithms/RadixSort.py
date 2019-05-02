@@ -1,4 +1,4 @@
-import math 
+import math
 
 def counting_sort(A, digit, radix):
     #"A" is a list to be sorted, radix is the base of the number system, digit is the digit
@@ -7,10 +7,10 @@ def counting_sort(A, digit, radix):
     #create a list B which will be the sorted list
     B = [0]*len(A)
     C = [0]*int(radix)
-    #counts the number of occurences of each digit in A 
+    #counts the number of occurences of each digit in A
     for i in range(0, len(A)):
         digit_of_Ai = int((A[i]/radix**digit)%radix)
-        C[digit_of_Ai] = C[digit_of_Ai] +1 
+        C[digit_of_Ai] = C[digit_of_Ai] +1
         #now C[i] is the value of the number of elements in A equal to i
 
     #this FOR loop changes C to show the cumulative # of digits up to that index of C
@@ -41,5 +41,21 @@ def radix_sort(A, radix):
     return output
 
 #A = [9,3,1,4,5,7,7,2,20,55]
-A = [10,1,300,100,8,102,-50,-201,-100]
-print (radix_sort(A,100))
+A = [-1, -10,-11,-100,-8,100, -200, -200, -90, 0,300]
+positive = []
+negative = []
+for number in A:
+    if (number<0):
+        negative.append(number)
+    else:
+        positive.append(number)
+
+temp =min(negative)
+negative.append(temp*-1)
+positive = (radix_sort(positive,10))
+negative = radix_sort(negative, 10)
+A = negative + positive
+A = A[1::]
+print(A)
+
+

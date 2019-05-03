@@ -1,5 +1,20 @@
 import math
 
+# regresa matriz con matrices
+def openArchive(nombre):
+    # abrir archivo
+    archivo = open(nombre, "r")
+
+    # leer el contenido del archivo
+    legend = archivo.read()
+
+    matriz = legend.split(",")
+    for x in range(0, len(matriz)):
+        matriz[x] = int(matriz[x])
+
+    archivo.close()
+    return matriz
+
 def counting_sort(A, digit, radix):
     #"A" is a list to be sorted, radix is the base of the number system, digit is the digit
     #we want to sort by
@@ -41,7 +56,7 @@ def radix_sort(A, radix):
     return output
 
 #A = [9,3,1,4,5,7,7,2,20,55]
-A = [-1, -10,-11,-100,-8,100, -200, -200, -90, 0,300]
+A = openArchive("numbers.txt")
 positive = []
 negative = []
 for number in A:

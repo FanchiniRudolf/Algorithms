@@ -1,4 +1,19 @@
 
+# regresa matriz con matrices
+def openArchive(nombre):
+    # abrir archivo
+    archivo = open(nombre, "r")
+
+    # leer el contenido del archivo
+    legend = archivo.read()
+
+    matriz = legend.split(",")
+    for x in range(0, len(matriz)):
+        matriz[x] = int(matriz[x])
+
+    archivo.close()
+    return matriz
+
 def QuickSort(values, start, end):
     if(start>=end):
         return
@@ -29,7 +44,8 @@ def QuickSort(values, start, end):
 
 
 
-array = [123,983,2,5,76,4,-12,43,-5,53,71,-34]
+array = openArchive("numbers.txt")
+print(array)
 QuickSort(array,0,len(array)-1)
 print(array)
 

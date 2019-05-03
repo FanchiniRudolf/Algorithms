@@ -34,3 +34,48 @@ values[i] = scratch[i]
 Next i
 End Mergesort
 """
+
+
+def mergeSort(unordered, start, end):
+    # base case
+    scratch = unordered[start:end]
+    if (start == end):
+        return
+    # divide the list in two parts
+    midpoint = (start + end) // 2
+    # Recursive on both parts
+    mergeSort(unordered, start, midpoint)
+    mergeSort(unordered, midpoint + 1, end)
+
+    leftIndex = start
+    rightIndex = midpoint + 1
+    scratchIndex = leftIndex
+
+    while ((leftIndex <= midpoint) and (rightIndex <= end)):
+        if (unordered[leftIndex] <= unordered[rightIndex]):
+            scratch[scratchIndex] = unordered[leftIndex]
+            leftIndex += 1
+        else:
+            scratch[scratchIndex] = unordered[rightIndex]
+            rightIndex += 1
+        scratchIndex += 1
+
+    for i in range(leftIndex, midpoint):
+        scratch[scratchIndex] = unordered[i]
+        scratchIndex += 1
+
+    for i in range(start, end):
+        unordered[i] = scratch[i]
+
+
+"""
+    if(start<end):
+        midpoint = (start + end) // 2
+        mergeSort(unordered, start, midpoint)
+        mergeSort(unordered, midpoint + 1, end)
+        merge(a, start, midpoint, end)
+
+"""
+
+a = [1, -59, 18, 64, -26]
+print(mergeSort(a, 0, len(a) - 1))

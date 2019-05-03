@@ -36,46 +36,51 @@ End Mergesort
 """
 
 
-def mergeSort(unordered, start, end):
-    # base case
-    scratch = unordered[start:end]
-    if (start == end):
-        return
-    # divide the list in two parts
-    midpoint = (start + end) // 2
-    # Recursive on both parts
-    mergeSort(unordered, start, midpoint)
-    mergeSort(unordered, midpoint + 1, end)
 
-    leftIndex = start
-    rightIndex = midpoint + 1
-    scratchIndex = leftIndex
-
-    while ((leftIndex <= midpoint) and (rightIndex <= end)):
-        if (unordered[leftIndex] <= unordered[rightIndex]):
-            scratch[scratchIndex] = unordered[leftIndex]
-            leftIndex += 1
-        else:
-            scratch[scratchIndex] = unordered[rightIndex]
-            rightIndex += 1
-        scratchIndex += 1
-
-    for i in range(leftIndex, midpoint):
-        scratch[scratchIndex] = unordered[i]
-        scratchIndex += 1
-
-    for i in range(start, end):
-        unordered[i] = scratch[i]
+def mergeSort(alist):
 
 
-"""
-    if(start<end):
-        midpoint = (start + end) // 2
-        mergeSort(unordered, start, midpoint)
-        mergeSort(unordered, midpoint + 1, end)
-        merge(a, start, midpoint, end)
+   if len(alist)>1:
+       mid = len(alist)//2
+       lefthalf = alist[:mid]
+       righthalf = alist[mid:]
 
-"""
+       #recursion
+       mergeSort(lefthalf)
+       mergeSort(righthalf)
 
-a = [1, -59, 18, 64, -26]
-print(mergeSort(a, 0, len(a) - 1))
+       i=0
+       j=0
+       k=0
+
+       while i < len(lefthalf) and j < len(righthalf):
+           if lefthalf[i] < righthalf[j]:
+               alist[k]=lefthalf[i]
+               i=i+1
+           else:
+               alist[k]=righthalf[j]
+               j=j+1
+           k=k+1
+
+       while i < len(lefthalf):
+           alist[k]=lefthalf[i]
+           i=i+1
+           k=k+1
+
+       while j < len(righthalf):
+           alist[k]=righthalf[j]
+           j=j+1
+           k=k+1
+
+
+archivo = open("numbers.txt", "r")
+numeros = archivo.readlines()
+archivo.close()
+arr = []
+for i in range(0, len(numeros)):
+    num = numeros[i].split(",")
+    num[len(num) - 1] = num[len(num) - 1].replace("\n", "")
+    for y in range(0, len(num)):
+        arr.append(int(num[y]))
+mergeSort(arr)
+print(arr)

@@ -31,4 +31,15 @@ def bubbleSort(lista):
                 lista[i] = lista[i-1]
                 lista[i-1] = temp
                 notSorted = True
-    print(lista)
+
+archivo = open("numbers.txt", "r")
+numeros = archivo.readlines()
+archivo.close()
+arr = []
+for i in range(0, len(numeros)):
+    num = numeros[i].split(",")
+    num[len(num) - 1] = num[len(num) - 1].replace("\n", "")
+    for y in range(0, len(num)):
+        arr.append(int(num[y]))
+bubbleSort(arr)
+print(arr)

@@ -1,3 +1,5 @@
+#Rudolf Josef Fanchini Reyes A01374448
+#Eduardo Gallegos Solís A01745776
 
 # regresa matriz con matrices
 def openArchive(nombre):

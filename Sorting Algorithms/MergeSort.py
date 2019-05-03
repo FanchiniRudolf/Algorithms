@@ -35,7 +35,8 @@ Next i
 End Mergesort
 """
 
-
+#Rudolf Josef Fanchini Reyes A01374448
+#Eduardo Gallegos Solís A01745776
 
 def mergeSort(alist):
 

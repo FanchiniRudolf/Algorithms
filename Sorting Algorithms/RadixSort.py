@@ -1,3 +1,6 @@
+#Rudolf Josef Fanchini Reyes A01374448
+#Eduardo Gallegos Solís A01745776
+
 import math
 
 # regresa matriz con matrices

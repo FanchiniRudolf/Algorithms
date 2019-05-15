@@ -62,7 +62,7 @@ for x in comprobacion:
     if True not in x:
         answer = False
 if answer:
-    print("Una secuencia valida para los %d valores es:" % len(opciones))
+    print("A valid sequence for the %d variables is:" % len(opciones))
     print(opciones)
 else:
-    print("No se encontro una secuencia valida")
+    print("No valid sequence found")

@@ -57,7 +57,12 @@ for claus in clauses:
         rounds +=1
     comprobacion.append(temp)
 
+answer = True
 for x in comprobacion:
     if True not in x:
-        print("no jalo")
-print(opciones)
+        answer = False
+if answer:
+    print("Una secuencia valida para los %d valores es:" % len(opciones))
+    print(opciones)
+else:
+    print("No se encontro una secuencia valida")

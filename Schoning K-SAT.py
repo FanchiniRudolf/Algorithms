@@ -62,7 +62,7 @@ for x in comprobacion:
     if True not in x:
         answer = False
 if answer:
-    print("A valid sequence for the %d variables is:" % len(opciones))
+    print("Satisfaible. A valid sequence for the %d variables is:" % len(opciones))
     print(opciones)
 else:
-    print("No valid sequence found")
+    print("Unsatisfaible. No valid sequence found")

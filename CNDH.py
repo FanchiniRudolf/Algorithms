@@ -9,6 +9,11 @@ class SampleApp(tk.Tk):
         tk.Tk.__init__(self, *args, **kwargs)
 
         self.title_font = tkfont.Font(family='Helvetica', size=18, weight="bold", slant="italic")
+        self._geom = '200x200+0+0'
+        pad = 3
+        self.geometry("{0}x{1}+0+0".format(
+            self.winfo_screenwidth() - pad, self.winfo_screenheight() - pad))
+        self.configure(background='green')
 
         # the container is where we'll stack a bunch of frames
         # on top of each other, then the one we want visible
@@ -17,6 +22,7 @@ class SampleApp(tk.Tk):
         container.pack(side="top", fill="both", expand=True)
         container.grid_rowconfigure(0, weight=1)
         container.grid_columnconfigure(0, weight=1)
+
 
         self.frames = {}
         for F in (StartPage, PageOne, PageTwo):

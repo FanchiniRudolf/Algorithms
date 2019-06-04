@@ -62,22 +62,30 @@ class StartPage(tk.Frame):
         self.grid_columnconfigure(2, weight=2)
         self.grid_columnconfigure(3, weight=1)
         self.grid_columnconfigure(4, weight=0)
+        self.grid_rowconfigure(0, weight=0)
+        self.grid_rowconfigure(1, weight=1)
+        self.grid_rowconfigure(2, weight=2)
+        self.grid_rowconfigure(3, weight=3)
+        self.grid_rowconfigure(4, weight=2)
+        self.grid_rowconfigure(5, weight=1)
+        self.grid_rowconfigure(6, weight=0)
 
         self.logo = ImageTk.PhotoImage(Image.open("assetsCNDH/Logo.PNG"))
         logoIm = tk.Label(self, image=self.logo, bg="white")
-        logoIm.grid(row=0, column =2, columnspan = 1)
+        logoIm.grid(row=2, column =2, columnspan = 1)
 
         self.ubi = ImageTk.PhotoImage(Image.open("assetsCNDH/Ubicacion.PNG"))
         label = tk.Label(self, image=self.ubi, font=controller.title_font, bg= "white")
-        label.grid(column =2, row =2)
+        label.grid(column =2, row =3)
 
-
-        button1 = tk.Button(self, text="Go to Page One",
-                            command=lambda: controller.show_frame("PageOne"))
-        button2 = tk.Button(self, text="Go to Page Two",
-                            command=lambda: controller.show_frame("PageTwo"))
-        button1.grid(column =1, row = 3, sticky= "E")
-        button2.grid(column =3, row =3, sticky= "W")
+        self.imgbt1= ImageTk.PhotoImage(Image.open("assetsCNDH/BotonComputo.PNG"))
+        buttonComputo = tk.Button(self, image = self.imgbt1,
+                            command=lambda: controller.show_frame("PageOne"), border=0)
+        self.imgbt2 = ImageTk.PhotoImage(Image.open("assetsCNDH/BotonEdificio.PNG"))
+        buttonEdificio = tk.Button(self, image = self.imgbt2,
+                            command=lambda: controller.show_frame("PageTwo"),border=-1)
+        buttonComputo.grid(column =1, row = 4, sticky= "E")
+        buttonEdificio.grid(column =3, row =4, sticky= "W")
 
 
 
@@ -87,24 +95,85 @@ class PageOne(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
         self.controller = controller
-        self.configure(background="green")
+        self.grid_columnconfigure(0, weight=0)
+        self.grid_columnconfigure(1, weight=1)
+        self.grid_columnconfigure(2, weight=2)
+        self.grid_columnconfigure(3, weight=1)
+        self.grid_columnconfigure(4, weight=0)
+        self.grid_rowconfigure(0, weight=0)
+        self.grid_rowconfigure(1, weight=1)
+        self.grid_rowconfigure(2, weight=2)
+        self.grid_rowconfigure(3, weight=3)
+        self.grid_rowconfigure(4, weight=2)
+        self.grid_rowconfigure(5, weight=1)
+        self.grid_rowconfigure(0, weight=6)
 
-        label = tk.Label(self, text="This is page 1", font=controller.title_font)
-        label.pack(side="top", fill="x", pady=10)
-        button = tk.Button(self, text="Go to the start page",
-                           command=lambda: controller.show_frame("StartPage"))
-        button.pack()
+        self.configure(background="white")
+
+        self.logo = ImageTk.PhotoImage(Image.open("assetsCNDH/Logo.PNG"))
+        logoIm = tk.Label(self, image=self.logo, bg="white")
+        logoIm.grid(row=1, column=1, columnspan=1)
+
+        self.ubi = ImageTk.PhotoImage(Image.open("assetsCNDH/seccionesComputo.PNG"))
+        label = tk.Label(self, image=self.ubi, font=controller.title_font)
+        label.grid(row = 2, column = 1)
+
+        self.namePlace = ImageTk.PhotoImage(Image.open("assetsCNDH/nombreComputo.PNG"))
+        label2 = tk.Label(self, image=self.namePlace, font=controller.title_font)
+        label2.grid(row = 1, column = 3)
+
+
+        self.imgbt1 = ImageTk.PhotoImage(Image.open("assetsCNDH/botonBack.PNG"))
+        button = tk.Button(self, image= self.imgbt1,
+                           command=lambda: controller.show_frame("StartPage"), border=0)
+        button.grid(row = 4, column = 3)
 
 class PageTwo(tk.Frame):
 
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
         self.controller = controller
-        label = tk.Label(self, text="This is page 2", font=controller.title_font)
-        label.pack(side="top", fill="x", pady=10)
-        button = tk.Button(self, text="Go to the start page",
-                           command=lambda: controller.show_frame("StartPage"))
-        button.pack()
+        self.grid_columnconfigure(0, weight=0)
+        self.grid_columnconfigure(1, weight=1)
+        self.grid_columnconfigure(2, weight=2)
+        self.grid_columnconfigure(3, weight=3)
+        self.grid_columnconfigure(4, weight=2)
+        self.grid_columnconfigure(5, weight=1)
+        self.grid_columnconfigure(6, weight=0)
+        self.grid_rowconfigure(0, weight=0)
+        self.grid_rowconfigure(1, weight=1)
+        self.grid_rowconfigure(2, weight=2)
+        self.grid_rowconfigure(3, weight=3)
+        self.grid_rowconfigure(4, weight=2)
+        self.grid_rowconfigure(5, weight=1)
+        self.grid_rowconfigure(6, weight=0)
+
+        self.configure(background="white")
+
+        self.logo = ImageTk.PhotoImage(Image.open("assetsCNDH/Logo.PNG"))
+        logoIm = tk.Label(self, image=self.logo, bg="white")
+        logoIm.grid(row=2, column=1)
+
+        self.ubi1 = ImageTk.PhotoImage(Image.open("assetsCNDH/secc1Edificio.PNG"))
+        label1 = tk.Label(self, image=self.ubi1, font=controller.title_font)
+        label1.grid(row=3, column=1)
+
+        self.ubi2 = ImageTk.PhotoImage(Image.open("assetsCNDH/secc2Edificio.PNG"))
+        label2 = tk.Label(self, image=self.ubi2, font=controller.title_font)
+        label2.grid(row=3, column=2)
+
+        self.ubi3 = ImageTk.PhotoImage(Image.open("assetsCNDH/secc3Edificio.PNG"))
+        label3 = tk.Label(self, image=self.ubi3, font=controller.title_font)
+        label3.grid(row=3, column=3)
+
+        self.namePlace = ImageTk.PhotoImage(Image.open("assetsCNDH/nombreEdificio.PNG"))
+        label2 = tk.Label(self, image=self.namePlace, font=controller.title_font)
+        label2.grid(row=2, column=4)
+
+        self.imgbt1 = ImageTk.PhotoImage(Image.open("assetsCNDH/botonBack.PNG"))
+        button = tk.Button(self, image=self.imgbt1,
+                           command=lambda: controller.show_frame("StartPage"), border=0)
+        button.grid(row=4, column=4)
 
 
 if __name__ == "__main__":

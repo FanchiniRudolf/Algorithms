@@ -1,5 +1,8 @@
 import tkinter as tk                # python 3
 from tkinter import font  as tkfont # python 3
+from PIL import ImageTk, Image
+import PIL
+import os
 #import Tkinter as tk     # python 2
 #import tkFont as tkfont  # python 2
 
@@ -13,7 +16,7 @@ class SampleApp(tk.Tk):
         pad = 3
         self.geometry("{0}x{1}+0+0".format(
             self.winfo_screenwidth() - pad, self.winfo_screenheight() - pad))
-        self.configure(background='green')
+        self.configure(background='white')
 
         # the container is where we'll stack a bunch of frames
         # on top of each other, then the one we want visible
@@ -45,18 +48,26 @@ class SampleApp(tk.Tk):
 
 class StartPage(tk.Frame):
 
+
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
         self.controller = controller
+        self.configure(background= "white")
         label = tk.Label(self, text="This is the start page", font=controller.title_font)
-        label.pack(side="top", fill="x", pady=10)
+        label.pack(side="top", pady=10, background = "whit")
+
+        self.logo = ImageTk.PhotoImage(Image.open("assetsCNDH/Logo.PNG"))
+        panel = tk.Label(controller, image=self.logo)
+        panel.pack(fill="both", expand="yes")
 
         button1 = tk.Button(self, text="Go to Page One",
                             command=lambda: controller.show_frame("PageOne"))
         button2 = tk.Button(self, text="Go to Page Two",
                             command=lambda: controller.show_frame("PageTwo"))
-        button1.pack()
-        button2.pack()
+        button1.pack(side="top")
+        button2.pack(side="top")
+
+
 
 
 class PageOne(tk.Frame):
@@ -83,5 +94,6 @@ class PageTwo(tk.Frame):
 
 
 if __name__ == "__main__":
+
     app = SampleApp()
     app.mainloop()

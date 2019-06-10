@@ -1,8 +1,7 @@
-import tkinter as tk                # python 3
+import tkinter as tk, threading            # python 3
 from tkinter import font  as tkfont # python 3
 from PIL import ImageTk, Image
-import PIL
-import os
+import imageio
 #import Tkinter as tk     # python 2
 #import tkFont as tkfont  # python 2
 
@@ -31,7 +30,7 @@ class SampleApp(tk.Tk):
 
 
         self.frames = {}
-        for F in (StartPage, PageOne, PageTwo):
+        for F in (StartPage, PageOne, PageTwo, PageThree):
             page_name = F.__name__
             frame = F(parent=container, controller=self,)
             self.frames[page_name] = frame
@@ -84,8 +83,13 @@ class StartPage(tk.Frame):
         self.imgbt2 = ImageTk.PhotoImage(Image.open("assetsCNDH/BotonEdificio.PNG"))
         buttonEdificio = tk.Button(self, image = self.imgbt2,
                             command=lambda: controller.show_frame("PageTwo"),border=-1)
+
+        self.imgbt3 = ImageTk.PhotoImage(Image.open("assetsCNDH/botonVideo.png"))
+        buttonVideo = tk.Button(self, image=self.imgbt3,
+                                   command=lambda: controller.show_frame("PageThree"), border=-1)
         buttonComputo.grid(column =1, row = 4, sticky= "E")
         buttonEdificio.grid(column =3, row =4, sticky= "W")
+        buttonVideo.grid(column=2, row=4, sticky="W")
 
 
 
@@ -115,7 +119,8 @@ class PageOne(tk.Frame):
         logoIm.grid(row=1, column=1, columnspan=1)
 
         self.ubi = ImageTk.PhotoImage(Image.open("assetsCNDH/seccionesComputo.PNG"))
-        label = tk.Label(self, image=self.ubi, font=controller.title_font)
+        label = tk.Label(self, text="SÓTANO\n\nSubdirección de Servicios Generales\n\nPLANTA BAJA\n\nSubdirección de Desarrollo Informático\n\nSubdirección de Desarrollo Tecnológico y Comunicaciones\nSubdirección de Administración de Proyectos\n\nPISO 1\n\nSubdirección de Desarrollo Informático\n\nSubdirección de Desarrollo Tecnológico y Comunicaciones\nSubdirección de Administración de Proyectos\nDirección General de Quejas, Orientación y Transparencia",
+                         font=controller.title_font, bg="white", justify = "left")
         label.grid(row = 2, column = 1)
 
         self.namePlace = ImageTk.PhotoImage(Image.open("assetsCNDH/nombreComputo.PNG"))
@@ -136,44 +141,76 @@ class PageTwo(tk.Frame):
         self.grid_columnconfigure(0, weight=0)
         self.grid_columnconfigure(1, weight=1)
         self.grid_columnconfigure(2, weight=2)
-        self.grid_columnconfigure(3, weight=3)
-        self.grid_columnconfigure(4, weight=2)
-        self.grid_columnconfigure(5, weight=1)
-        self.grid_columnconfigure(6, weight=0)
+        self.grid_columnconfigure(3, weight=1)
+        self.grid_columnconfigure(4, weight=0)
         self.grid_rowconfigure(0, weight=0)
         self.grid_rowconfigure(1, weight=1)
         self.grid_rowconfigure(2, weight=2)
         self.grid_rowconfigure(3, weight=3)
         self.grid_rowconfigure(4, weight=2)
         self.grid_rowconfigure(5, weight=1)
-        self.grid_rowconfigure(6, weight=0)
+        self.grid_rowconfigure(0, weight=6)
 
         self.configure(background="white")
 
         self.logo = ImageTk.PhotoImage(Image.open("assetsCNDH/Logo.PNG"))
         logoIm = tk.Label(self, image=self.logo, bg="white")
-        logoIm.grid(row=2, column=1)
+        logoIm.grid(row=1, column=1, columnspan=1)
 
-        self.ubi1 = ImageTk.PhotoImage(Image.open("assetsCNDH/secc1Edificio.PNG"))
-        label1 = tk.Label(self, image=self.ubi1, font=controller.title_font)
-        label1.grid(row=3, column=1)
+        self.ubi = ImageTk.PhotoImage(Image.open("assetsCNDH/seccionesComputo.PNG"))
+        label = tk.Label(self,
+                         text="SOTANO 2 PERIFÉRICO\nDirección General de Quejas, Orientación y\nTransparencia\n\nSOTANO 1 CONTRERAS\nSubdirección de Servicios Generales\n\nPLANTA BAJA PERIFÉRICO\nDirección General de Quejas, Orientación y\nTransparencia\nUnidad de Transparencia",
+                         font=controller.title_font, bg="white", justify="left")
+        label.grid(row=2, column=1)
 
-        self.ubi2 = ImageTk.PhotoImage(Image.open("assetsCNDH/secc2Edificio.PNG"))
-        label2 = tk.Label(self, image=self.ubi2, font=controller.title_font)
-        label2.grid(row=3, column=2)
+        label = tk.Label(self,
+                         text="\nOficialía de Partes\nPLANTA BAJA CONTRERAS\nDirección General de Quejas, Orientación y\nTransparencia\nDirección de Atención al Público\nLudoteca\nSala de Lactancia\nCentro de Atención Telefónica\n\nMEZANINE PERIFÉRICO\nAuditorio\nCuarta Visitaduría:\nDirección de Asuntos de Seguridad Social en\nmateria de Vivienda\nDirección de Asuntos de Indígenas en Reclusión"
+                         ,font=controller.title_font, bg="white", justify="left")
+        label.grid(row=2, column=3)
 
-        self.ubi3 = ImageTk.PhotoImage(Image.open("assetsCNDH/secc3Edificio.PNG"))
-        label3 = tk.Label(self, image=self.ubi3, font=controller.title_font)
-        label3.grid(row=3, column=3)
 
-        self.namePlace = ImageTk.PhotoImage(Image.open("assetsCNDH/nombreEdificio.PNG"))
+        self.namePlace = ImageTk.PhotoImage(Image.open("assetsCNDH/nombreComputo.PNG"))
         label2 = tk.Label(self, image=self.namePlace, font=controller.title_font)
-        label2.grid(row=2, column=4)
+        label2.grid(row=1, column=3)
 
         self.imgbt1 = ImageTk.PhotoImage(Image.open("assetsCNDH/botonBack.PNG"))
         button = tk.Button(self, image=self.imgbt1,
                            command=lambda: controller.show_frame("StartPage"), border=0)
-        button.grid(row=4, column=4)
+        button.grid(row=4, column=3)
+
+class PageThree(tk.Frame):
+    def stream(label, video):
+
+        for image in video.iter_data():
+            frame_image = ImageTk.PhotoImage(Image.fromarray(image))
+            label.config(image=frame_image)
+            label.image = frame_image
+
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self, parent)
+        self.controller = controller
+        self.grid_columnconfigure(0, weight=0)
+        self.grid_columnconfigure(1, weight=1)
+        self.grid_columnconfigure(2, weight=2)
+        self.grid_columnconfigure(3, weight=1)
+        self.grid_columnconfigure(4, weight=0)
+        self.grid_rowconfigure(0, weight=0)
+        self.grid_rowconfigure(1, weight=1)
+        self.grid_rowconfigure(2, weight=2)
+        self.grid_rowconfigure(3, weight=3)
+        self.grid_rowconfigure(4, weight=2)
+        self.grid_rowconfigure(5, weight=1)
+        self.grid_rowconfigure(0, weight=6)
+
+        self.configure(background="white")
+
+        self.video_name = "assetsCNDH/prueba.mp4"  # This is your video file path
+        self.video = imageio.get_reader(self.video_name)
+        self.my_label = tk.Label(self)
+        self.my_label.grid(row =3, column = 2)
+        self.thread = threading.Thread(target=PageThree.stream, args=(self.my_label, self.video))
+        self.thread.daemon = 1
+        self.thread.start()
 
 
 if __name__ == "__main__":

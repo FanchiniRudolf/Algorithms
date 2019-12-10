@@ -232,7 +232,7 @@ def AmbasBtn():
     f.write(txtMatc)
     f.close()
     matrizC = fuerzaBruta(matrizA, matrizB)
-    f = filedialog.asksaveasfile(mode='w', defaultextension=".txt")
+    f = filedialog.askdirectory()
     if f is None:  # asksaveasfile return `None` if dialog closed with "cancel".
         return
     txtMatc = matrizToSting(matrizC)
